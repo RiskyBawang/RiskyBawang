@@ -87,8 +87,9 @@ box-shadow:0 5px 15px rgba(0,0,0,0.1);
 
 .product img{
 width:100%;
-border-radius:8px;
-margin-bottom:15px;
+height:160px;
+object-fit:cover;
+border-radius:6px;
 }
 
 .product h3{
@@ -103,3 +104,4 @@ background:#2c2c2c;
 color:white;
 text-align:center;
 }
+
