@@ -13,16 +13,12 @@
   --cream2: #e8dcc4;
   --gold: #c9922a;
   --gold2: #e8b04a;
-  --red: #8b2a1a;
-  --red2: #b83a22;
-  --green: #2d4a1e;
-  --text-dim: rgba(242,234,216,0.82);
-  --text-dimmer: rgba(242,234,216,0.62);
+  --text-dim: rgba(242,234,216,0.85);
+  --text-dimmer: rgba(242,234,216,0.65);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
-
-html { scroll-behavior: smooth; }
+html { scroll-behavior:smooth; }
 
 body {
   background: var(--bg);
@@ -32,351 +28,261 @@ body {
   overflow-x: hidden;
 }
 
-/* ── NOISE OVERLAY ── */
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  pointer-events:none;
-  z-index:999;
-}
-
-/* ══════════════════ NAV ══════════════════ */
+/* NAV */
 nav {
   position: fixed;
   top:0; left:0; right:0;
-  z-index: 100;
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.4rem 4vw;
-  background: linear-gradient(to bottom, rgba(13,10,7,0.95), transparent);
+  padding: 1.2rem 5vw;
+  background: rgba(13,10,7,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(201,146,42,0.1);
 }
-
 .nav-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  letter-spacing: 0.03em;
   color: var(--cream);
 }
-
 .nav-logo span { color: var(--gold); }
-
 .nav-badge {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--text-dim);
-  border: 1px solid rgba(201,146,42,0.3);
-  padding: 0.35rem 0.9rem;
+  color: var(--gold);
+  border: 1px solid rgba(201,146,42,0.35);
+  padding: 0.3rem 0.8rem;
 }
-
 .nav-wa {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   color: var(--gold2);
   text-decoration: none;
-  transition: color 0.3s;
 }
-.nav-wa:hover { color: var(--cream); }
+@media(max-width:500px){ .nav-badge { display:none; } }
 
-/* ══════════════════ HERO ══════════════════ */
+/* HERO */
 .hero {
   min-height: 100vh;
+  padding: 8rem 5vw 5rem;
   position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: 0 6vw;
 }
-
 .hero-bg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 55% 70% at 75% 50%, rgba(45,74,30,0.25) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 50% at 20% 80%, rgba(139,42,26,0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 20%, rgba(201,146,42,0.08) 0%, transparent 70%);
+    radial-gradient(ellipse 55% 70% at 75% 50%, rgba(45,74,30,0.2) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 15% 80%, rgba(139,42,26,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 10%, rgba(201,146,42,0.07) 0%, transparent 70%);
 }
-
-/* big decorative text behind */
 .hero-deco {
   position: absolute;
   right: -2vw;
   top: 50%;
   transform: translateY(-50%);
   font-family: 'Playfair Display', serif;
-  font-size: clamp(8rem, 18vw, 22rem);
+  font-size: clamp(7rem, 17vw, 20rem);
   font-weight: 900;
   font-style: italic;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(201,146,42,0.08);
+  -webkit-text-stroke: 1px rgba(201,146,42,0.07);
   line-height: 1;
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
 }
-
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 700px;
+  max-width: 680px;
 }
-
 .hero-eyebrow {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  animation: fadeUp 1s 0.1s both;
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
 }
-
 .eyebrow-line {
-  width: 40px;
-  height: 1px;
+  width: 36px; height: 1px;
   background: var(--gold);
+  flex-shrink: 0;
 }
-
 .eyebrow-text {
-  font-size: 0.65rem;
-  letter-spacing: 0.45em;
+  font-size: 0.63rem;
+  letter-spacing: 0.42em;
   text-transform: uppercase;
   color: var(--gold);
 }
-
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  font-size: clamp(3rem, 7vw, 6.5rem);
   font-weight: 900;
   line-height: 1.0;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
-  animation: fadeUp 1s 0.25s both;
 }
-
 .hero h1 .accent { color: var(--gold); font-style: italic; }
 .hero h1 .light { font-weight: 400; font-style: italic; color: var(--cream2); }
-
 .hero-sub {
   font-size: 0.9rem;
   line-height: 1.9;
   color: var(--text-dim);
-  max-width: 480px;
+  max-width: 460px;
   margin-bottom: 2.5rem;
-  animation: fadeUp 1s 0.4s both;
 }
-
 .hero-ctas {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  animation: fadeUp 1s 0.55s both;
 }
-
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   padding: 0.9rem 2rem;
   background: var(--gold);
   color: var(--bg);
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.3s;
 }
-.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
-
+.btn-primary:hover { background: var(--gold2); }
 .btn-outline {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
   padding: 0.9rem 2rem;
-  border: 1px solid rgba(242,234,216,0.2);
+  border: 1px solid rgba(242,234,216,0.25);
   color: var(--cream);
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   transition: border-color 0.3s, color 0.3s;
 }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
 .hero-stats {
   display: flex;
-  gap: 3rem;
-  margin-top: 4rem;
-  padding-top: 2.5rem;
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+  padding-top: 2rem;
   border-top: 1px solid rgba(242,234,216,0.08);
-  animation: fadeUp 1s 0.7s both;
+  flex-wrap: wrap;
 }
-
 .stat-val {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 700;
   color: var(--gold2);
   line-height: 1;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
 }
-
 .stat-key {
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
+  font-size: 0.63rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-dimmer);
 }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-dimmer);
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  animation: fadeUp 1.5s 1.2s both;
-}
-
-.scroll-line {
-  width: 1px;
-  height: 36px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollPulse 2s infinite;
-}
-
-@keyframes scrollPulse {
-  0%,100% { opacity: 0.3; }
-  50% { opacity: 1; }
-}
-
-/* ══════════════════ TENTANG ══════════════════ */
+/* ABOUT */
 .about {
-  padding: 8rem 6vw;
+  padding: 7rem 5vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  gap: 5rem;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1150px;
   margin: 0 auto;
 }
+@media(max-width:768px){ .about { grid-template-columns:1fr; gap:3rem; } }
 
-@media(max-width:768px){
-  .about { grid-template-columns: 1fr; gap: 3rem; }
-}
-
-.about-text .section-tag {
-  font-size: 0.62rem;
-  letter-spacing: 0.45em;
+.section-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.42em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 1.2rem;
   display: block;
+  margin-bottom: 1rem;
 }
-
-.about-text h2 {
+.about h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
 }
-
-.about-text h2 em { color: var(--gold); font-style: italic; }
-
-.about-text p {
-  font-size: 0.88rem;
+.about h2 em { color: var(--gold); font-style: italic; }
+.about p {
+  font-size: 0.87rem;
   line-height: 2;
   color: var(--text-dim);
   margin-bottom: 1rem;
 }
-
 .about-boxes {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
   background: rgba(242,234,216,0.06);
 }
-
 .about-box {
   background: var(--bg2);
-  padding: 2rem 1.5rem;
+  padding: 1.8rem 1.4rem;
   transition: background 0.3s;
 }
-.about-box:hover { background: rgba(201,146,42,0.06); }
-
-.about-box-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
-
+.about-box:hover { background: rgba(201,146,42,0.05); }
+.about-box-icon { font-size: 1.7rem; margin-bottom: 0.7rem; display: block; }
 .about-box h4 {
   font-family: 'Playfair Display', serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   color: var(--cream);
 }
-
 .about-box p {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   line-height: 1.7;
   color: var(--text-dimmer);
+  margin: 0;
 }
 
-/* ══════════════════ PRODUK ══════════════════ */
+/* PRODUCTS */
 .products {
-  padding: 6rem 6vw;
+  padding: 6rem 5vw;
   background: var(--bg2);
 }
-
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
-
-.section-header .section-tag {
-  font-size: 0.62rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  display: block;
-}
-
 .section-header h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
   font-weight: 700;
   line-height: 1.2;
+  margin-top: 0.5rem;
 }
-
 .section-header h2 em { color: var(--gold); font-style: italic; }
-
 .section-header p {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: var(--text-dim);
-  margin-top: 0.8rem;
-  max-width: 500px;
+  margin-top: 0.7rem;
+  max-width: 480px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.8;
 }
-
-/* FEATURED PRODUCT */
 .product-featured {
-  background: linear-gradient(135deg, rgba(45,74,30,0.3) 0%, rgba(13,10,7,0.8) 60%);
+  background: linear-gradient(135deg, rgba(45,74,30,0.25) 0%, rgba(13,10,7,0.9) 60%);
   border: 1px solid rgba(201,146,42,0.2);
-  padding: 3rem;
+  padding: 2.5rem;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 2rem;
@@ -385,102 +291,86 @@ nav {
   position: relative;
   overflow: hidden;
   transition: border-color 0.3s;
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-.product-featured:hover { border-color: rgba(201,146,42,0.5); }
-
+.product-featured + .product-featured { margin-top: 0; }
+.product-featured:hover { border-color: rgba(201,146,42,0.45); }
 .product-featured::before {
   content: 'UNGGULAN';
   position: absolute;
-  top: 1.2rem;
-  right: 1.5rem;
-  font-size: 0.55rem;
+  top: 1rem; right: 1.2rem;
+  font-size: 0.52rem;
   letter-spacing: 0.4em;
   color: var(--gold);
   border: 1px solid var(--gold);
-  padding: 0.25rem 0.6rem;
+  padding: 0.2rem 0.55rem;
 }
-
 .product-featured-deco {
   position: absolute;
-  right: -1rem;
-  bottom: -2rem;
-  font-size: 8rem;
+  right: -1rem; bottom: -2rem;
+  font-size: 7rem;
   opacity: 0.04;
   user-select: none;
 }
-
 .product-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   color: var(--cream);
 }
-
 .product-sub {
-  font-size: 0.78rem;
+  font-size: 0.77rem;
   color: var(--text-dim);
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
   line-height: 1.7;
 }
-
-.product-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
+.product-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .tag {
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  padding: 0.3rem 0.8rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  padding: 0.28rem 0.75rem;
   border: 1px solid rgba(201,146,42,0.3);
   color: var(--gold2);
   text-transform: uppercase;
 }
-
-.tag.red { border-color: rgba(184,58,34,0.4); color: #e07060; }
 .tag.green { border-color: rgba(45,74,30,0.6); color: #7aab5a; }
-
-.product-weight {
-  text-align: right;
-  white-space: nowrap;
-}
-
+.product-weight { text-align: right; white-space: nowrap; }
 .weight-val {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--gold);
   line-height: 1;
   display: block;
 }
-
 .weight-key {
-  font-size: 0.62rem;
-  letter-spacing: 0.25em;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-dimmer);
 }
-
-/* PRODUCT GRID */
+@media(max-width:500px){
+  .product-featured { grid-template-columns: 1fr; }
+  .product-weight { text-align: left; }
+}
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1px;
   background: rgba(242,234,216,0.05);
+  max-width: 1050px;
+  margin: 1.5rem auto 0;
 }
-
 .product-card {
   background: var(--bg);
-  padding: 2rem 1.8rem;
+  padding: 1.8rem 1.6rem;
   transition: background 0.3s;
-  cursor: default;
   position: relative;
   overflow: hidden;
 }
-
 .product-card::after {
   content: '';
   position: absolute;
@@ -489,41 +379,30 @@ nav {
   background: var(--gold);
   transition: width 0.4s ease;
 }
-
 .product-card:hover { background: rgba(201,146,42,0.04); }
 .product-card:hover::after { width: 100%; }
-
-.card-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
-
+.card-emoji { font-size: 1.9rem; margin-bottom: 0.9rem; display: block; }
 .card-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   color: var(--cream);
 }
-
 .card-desc {
-  font-size: 0.78rem;
+  font-size: 0.77rem;
   color: var(--text-dim);
   line-height: 1.7;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
-
-.card-options {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
+.card-options { display: flex; flex-direction: column; gap: 0.3rem; }
 .card-option {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--text-dimmer);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
-
 .card-option::before {
   content: '';
   display: inline-block;
@@ -533,19 +412,17 @@ nav {
   flex-shrink: 0;
 }
 
-/* ══════════════════ AREA LAYANAN ══════════════════ */
+/* AREA */
 .area {
-  padding: 7rem 6vw;
-  max-width: 1100px;
+  padding: 7rem 5vw;
+  max-width: 1050px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  gap: 5rem;
   align-items: center;
 }
-
-@media(max-width:768px){ .area { grid-template-columns: 1fr; gap: 3rem; } }
-
+@media(max-width:768px){ .area { grid-template-columns:1fr; gap:3rem; } }
 .area-map {
   aspect-ratio: 1;
   background: var(--bg2);
@@ -556,395 +433,182 @@ nav {
   position: relative;
   overflow: hidden;
 }
-
 .area-map::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(201,146,42,0.08) 0%, transparent 70%);
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(circle at 50% 50%, rgba(201,146,42,0.07) 0%, transparent 70%);
 }
-
 .map-pin {
-  font-size: 3rem;
+  font-size: 2.8rem;
   position: relative;
   z-index: 1;
-  animation: pinBounce 2s ease-in-out infinite;
+  animation: pinBounce 2.5s ease-in-out infinite;
 }
-
 @keyframes pinBounce {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-
 .map-label {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--gold);
   white-space: nowrap;
 }
-
-.map-rings {
+.map-ring {
   position: absolute;
-  width: 60%; aspect-ratio: 1;
   border-radius: 50%;
-  border: 1px solid rgba(201,146,42,0.1);
-  animation: ringExpand 3s ease-in-out infinite;
+  border: 1px solid rgba(201,146,42,0.12);
 }
-
-.map-rings:nth-child(2) { width: 75%; animation-delay: 1s; }
-.map-rings:nth-child(3) { width: 90%; animation-delay: 2s; }
-
-@keyframes ringExpand {
-  0%,100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.15; transform: scale(1.05); }
+.map-ring:nth-child(1){ width:55%; aspect-ratio:1; animation: ringPulse 3s 0s ease-in-out infinite; }
+.map-ring:nth-child(2){ width:72%; aspect-ratio:1; animation: ringPulse 3s 1s ease-in-out infinite; }
+.map-ring:nth-child(3){ width:88%; aspect-ratio:1; animation: ringPulse 3s 2s ease-in-out infinite; }
+@keyframes ringPulse {
+  0%,100%{ opacity:0.5; }
+  50%{ opacity:0.12; }
 }
-
-.area-text .section-tag {
-  font-size: 0.62rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.2rem;
-  display: block;
-}
-
 .area-text h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 }
-
 .area-text p {
-  font-size: 0.87rem;
+  font-size: 0.86rem;
   line-height: 2;
   color: var(--text-dim);
   margin-bottom: 1rem;
 }
-
 .area-note {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1.2rem 1.5rem;
-  background: rgba(201,146,42,0.07);
+  gap: 0.9rem;
+  padding: 1.1rem 1.3rem;
+  background: rgba(201,146,42,0.06);
   border-left: 2px solid var(--gold);
-  margin-top: 1.5rem;
+  margin-top: 1.3rem;
 }
-
-.area-note-icon { font-size: 1.2rem; flex-shrink: 0; }
-
+.area-note-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
 .area-note p {
-  font-size: 0.8rem;
+  font-size: 0.79rem;
   color: var(--cream2);
   margin: 0;
   line-height: 1.7;
 }
 
-/* ══════════════════ ORDER ══════════════════ */
+/* ORDER */
 .order {
-  padding: 7rem 6vw;
+  padding: 7rem 5vw;
   background: var(--bg2);
   text-align: center;
 }
-
 .order h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
   font-weight: 900;
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
-
 .order h2 em { color: var(--gold); font-style: italic; }
-
 .order-sub {
-  font-size: 0.87rem;
+  font-size: 0.86rem;
   color: var(--text-dim);
-  max-width: 460px;
-  margin: 0 auto 3rem;
+  max-width: 440px;
+  margin: 0 auto 2.8rem;
   line-height: 1.9;
 }
-
 .order-card {
   display: inline-flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.3rem;
   background: var(--bg);
   border: 1px solid rgba(201,146,42,0.25);
-  padding: 2rem 3rem;
-  margin-bottom: 2rem;
+  padding: 1.8rem 2.8rem;
+  margin-bottom: 2.5rem;
   transition: border-color 0.3s;
 }
-
 .order-card:hover { border-color: var(--gold); }
-
-.wa-icon { font-size: 2.5rem; }
-
+.wa-icon { font-size: 2.3rem; }
 .order-card-text { text-align: left; }
-
 .order-card-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.35em;
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--text-dimmer);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
 }
-
 .order-card-number {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 700;
   color: var(--cream);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
-
+@media(max-width:500px){
+  .order-card { flex-direction: column; text-align: center; padding: 1.5rem 2rem; }
+  .order-card-text { text-align: center; }
+}
 .order-steps {
   display: flex;
   justify-content: center;
-  gap: 0;
   flex-wrap: wrap;
-  max-width: 700px;
+  max-width: 680px;
   margin: 0 auto 3rem;
 }
-
 .step {
   flex: 1;
-  min-width: 160px;
-  padding: 2rem 1.5rem;
+  min-width: 150px;
+  padding: 1.8rem 1.2rem;
   position: relative;
   text-align: center;
 }
-
 .step:not(:last-child)::after {
   content: '→';
   position: absolute;
-  right: -0.5rem;
+  right: -0.4rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-dimmer);
-  font-size: 1rem;
 }
-
+@media(max-width:500px){ .step:not(:last-child)::after { display:none; } }
 .step-num {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: 1.9rem;
   font-weight: 900;
   color: rgba(201,146,42,0.2);
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
-
 .step-text {
-  font-size: 0.78rem;
+  font-size: 0.77rem;
   color: var(--text-dim);
   line-height: 1.6;
 }
-
 .wa-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 1.1rem 2.8rem;
+  gap: 0.6rem;
+  padding: 1.05rem 2.5rem;
   background: #25d366;
   color: #fff;
   text-decoration: none;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: background 0.3s, transform 0.2s;
   border-radius: 2px;
 }
-
 .wa-btn:hover { background: #1ebe5a; transform: translateY(-2px); }
 
-/* ══════════════════ VIDEO SCRIPT ══════════════════ */
-.script {
-  padding: 7rem 6vw;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.script .section-tag {
-  font-size: 0.62rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.script h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 700;
-  margin-bottom: 3rem;
-}
-
-.script h2 em { color: var(--gold); font-style: italic; }
-
-.script-tabs {
-  display: flex;
-  gap: 0;
-  margin-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(242,234,216,0.08);
-}
-
-.tab-btn {
-  padding: 0.8rem 1.5rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-dimmer);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-}
-
-.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-.tab-btn:hover { color: var(--cream); }
-
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-
-.scene {
-  margin-bottom: 2.5rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(242,234,216,0.06);
-}
-
-.scene:last-child { border-bottom: none; margin-bottom: 0; }
-
-.scene-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.2rem;
-}
-
-.scene-time {
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  color: var(--gold);
-  border: 1px solid rgba(201,146,42,0.3);
-  padding: 0.2rem 0.6rem;
-  white-space: nowrap;
-}
-
-.scene-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--cream2);
-}
-
-.scene-row {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 1rem;
-  margin-bottom: 0.8rem;
-}
-
-.scene-label-col {
-  font-size: 0.62rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--text-dimmer);
-  padding-top: 0.15rem;
-}
-
-.scene-content {
-  font-size: 0.84rem;
-  line-height: 1.8;
-  color: var(--text-dim);
-}
-
-.scene-content em {
-  color: var(--cream);
-  font-style: italic;
-  font-family: 'Playfair Display', serif;
-}
-
-/* ══════════════════ CAPTION SECTION ══════════════════ */
-.captions {
-  padding: 6rem 6vw;
-  background: var(--bg2);
-}
-
-.captions .section-header { margin-bottom: 3rem; }
-
-.caption-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.caption-card {
-  background: var(--bg);
-  border: 1px solid rgba(242,234,216,0.06);
-  padding: 2rem;
-  transition: border-color 0.3s;
-}
-
-.caption-card:hover { border-color: rgba(201,146,42,0.25); }
-
-.caption-platform {
-  font-size: 0.62rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.caption-body {
-  font-size: 0.82rem;
-  line-height: 1.9;
-  color: var(--text-dim);
-  white-space: pre-line;
-}
-
-.caption-hashtags {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  color: rgba(201,146,42,0.6);
-  font-style: italic;
-  line-height: 1.7;
-}
-
-.copy-btn {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: none;
-  border: 1px solid rgba(242,234,216,0.1);
-  color: var(--text-dimmer);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.copy-btn:hover { border-color: var(--gold); color: var(--gold); }
-.copy-btn.copied { border-color: #25d366; color: #25d366; }
-
-/* ══════════════════ FOOTER ══════════════════ */
+/* FOOTER */
 footer {
-  padding: 3rem 6vw;
+  padding: 2.5rem 5vw;
   border-top: 1px solid rgba(242,234,216,0.06);
   display: flex;
   justify-content: space-between;
@@ -952,35 +616,159 @@ footer {
   flex-wrap: wrap;
   gap: 1rem;
 }
-
 .footer-brand {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
 }
-
 .footer-brand span { color: var(--gold); }
-
 .footer-info {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-dimmer);
   line-height: 1.8;
   text-align: center;
 }
-
 .footer-wa {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--gold);
   text-decoration: none;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
+@media(max-width:600px){ footer { flex-direction:column; text-align:center; } }
+</style>
+</head>
+<body>
 
-/* ══════════════════ ANIMATIONS ══════════════════ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Risky <span>Bawang</span></div>
+  <div class="nav-badge">Cabang Magetan</div>
+  <a href="https://wa.me/6287780748765" class="nav-wa" target="_blank">📱 087780748765</a>
+</nav>
 
-/* ════════
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-deco">Rempah</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Distributor Rempah Magetan</span>
+    </div>
+    <h1>
+      Risky<br>
+      <span class="accent">Bawang</span><br>
+      <span class="light">Magetan</span>
+    </h1>
+    <p class="hero-sub">
+      Pusat distribusi bawang putih &amp; rempah pilihan di Magetan. Melayani pembelian grosir skala besar maupun eceran — langsung dari sumber terpercaya.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/6287780748765?text=Halo%20Risky%20Bawang%2C%20saya%20ingin%20pesan%20produk" class="btn-primary" target="_blank">📱 Pesan via WhatsApp</a>
+      <a href="#produk" class="btn-outline">Lihat Produk</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">8+</div>
+        <div class="stat-key">Jenis Produk</div>
+      </div>
+      <div>
+        <div class="stat-val">Grosir</div>
+        <div class="stat-key">&amp; Eceran</div>
+      </div>
+      <div>
+        <div class="stat-val">Magetan</div>
+        <div class="stat-key">Jawa Timur</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  
+<!-- TENTANG -->
+<section class="about">
+  <div>
+    <span class="section-tag">Tentang Kami</span>
+    <h2>Distributor <em>Terpercaya</em><br>di Magetan</h2>
+    <p>Risky Bawang Cabang Magetan hadir untuk memenuhi kebutuhan bawang putih dan rempah berkualitas — mulai dari skala rumah tangga, pedagang pasar, warung makan, katering, hingga distributor besar.</p>
+    <p>Kami mengutamakan kualitas produk segar, timbangan jujur, dan pelayanan yang cepat. Berlokasi strategis di kawasan Pasar Sayur Magetan.</p>
+  </div>
+  <div class="about-boxes">
+    <div class="about-box">
+      <span class="about-box-icon">🧄</span>
+      <h4>Produk Segar</h4>
+      <p>Bawang putih &amp; rempah pilihan dari sumber terpercaya.</p>
+    </div>
+    <div class="about-box">
+      <span class="about-box-icon">⚖️</span>
+      <h4>Timbangan Jujur</h4>
+      <p>Setiap karung ditimbang akurat, tidak pernah dikurangi.</p>
+    </div>
+    <div class="about-box">
+      <span class="about-box-icon">🚚</span>
+      <h4>Pengiriman Lokal</h4>
+      <p>Pengiriman area sekitar Pasar Sayur Magetan.</p>
+    </div>
+    <div class="about-box">
+      <span class="about-box-icon">🤝</span>
+      <h4>Grosir &amp; Eceran</h4>
+      <p>Melayani semua skala pembelian, harga kompetitif.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section class="products" id="produk">
+  <div class="section-header">
+    <span class="section-tag">Katalog Produk</span>
+    <h2>Produk <em>Unggulan</em> Kami</h2>
+    <p>Tersedia dalam kemasan karung maupun eceran sesuai kebutuhan Anda.</p>
+  </div>
+
+  <div class="product-featured">
+    <div class="product-featured-deco">🧄</div>
+    <div>
+      <div class="product-name">Bawang Putih Sinco (Honan)</div>
+      <p class="product-sub">Varietas Honan — biji besar, kulit tipis, aroma kuat. Favorit dapur profesional dan pedagang grosir.</p>
+      <div class="product-tags">
+        <span class="tag">Per Sak 20 kg</span>
+        <span class="tag green">Grade A</span>
+        <span class="tag">Stok Tersedia</span>
+      </div>
+    </div>
+    <div class="product-weight">
+      <span class="weight-val">20 kg</span>
+      <span class="weight-key">Per Karung</span>
+    </div>
+  </div>
+
+  <div class="product-featured" style="background: linear-gradient(135deg, rgba(139,42,26,0.12) 0%, rgba(13,10,7,0.9) 60%); margin-top: 1.5rem;">
+    <div class="product-featured-deco">🌿</div>
+    <div>
+      <div class="product-name">Bawang Putih Kating</div>
+      <p class="product-sub">Varietas lokal Kating — biji lebih kecil, aroma pekat, rasa intens. Pilihan utama untuk bumbu giling dan masakan tradisional.</p>
+      <div class="product-tags">
+        <span class="tag">Per Sak 20 kg</span>
+        <span class="tag green">Lokal Premium</span>
+        <span class="tag">Stok Tersedia</span>
+      </div>
+    </div>
+    <div class="product-weight">
+      <span class="weight-val">20 kg</span>
+      <span class="weight-key">Per Karung</span>
+    </div>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card">
+      <span class="card-emoji">🧅</span>
+      <div class="card-name">Bawang Bombay</div>
+      <p class="card-desc">Bawang bombay segar berukuran besar. Cocok untuk tumisan, sup, dan masakan sehari-hari.</p>
+      <div class="card-options">
+        <div class="card-option">Per Sak 25 kg</div>
+        <div class="card-option">Stok selalu tersedia</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <span class="card-emoji">🌶️</span>
+      <div class="card-name">Cabai Kering</div>
+      <p class="card-desc">Cabai kering pilihan, warna merah cerah, tingkat kepedasan optimal. Ideal untuk bumbu dan industri makanan.<
